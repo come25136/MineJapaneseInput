@@ -3,6 +3,8 @@ import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
+import javax.imageio.ImageIO;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +20,33 @@ public class Main implements NativeKeyListener {
     }
 
     public static void main(String[] args) {
+        // アイコンイメージの読み込み
+        Image image = null;
+        try {
+            image = ImageIO.read(Thread.currentThread()
+                    .getContextClassLoader()
+                    .getResourceAsStream("icon/icon.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // トレイアイコン生成
+        TrayIcon icon = new TrayIcon(image);
+
+        // ポップアップメニュー
+        PopupMenu menu = new PopupMenu();
+
+        // 終了メニュー
+        MenuItem exitItem = new MenuItem("終了");
+        exitItem.addActionListener(e -> System.exit(0));
+        menu.add(exitItem);
+        icon.setPopupMenu(menu);
+        try {
+            SystemTray.getSystemTray().add(icon);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+
         if (!GlobalScreen.isNativeHookRegistered()) {
             try {
                 GlobalScreen.registerNativeHook();
