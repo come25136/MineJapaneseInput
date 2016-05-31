@@ -51,8 +51,8 @@ public class Main extends NativeKeyAdapter {
 	}
 
 	@Override
-	public void nativeKeyPressed(NativeKeyEvent e) {
-		if(e.getKeyCode() == NativeKeyEvent.VC_ENTER) {
+	public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
+		if(nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_ENTER) {
 			if(t_flag == 1 && ent_flag == 1) {
 				this.pushHankaku();
 				t_flag = 1;
@@ -63,10 +63,10 @@ public class Main extends NativeKeyAdapter {
 				ent_flag = 1;
 			}
 			return;
-		} else if(e.getKeyCode() == NativeKeyEvent.VC_T) {
+		} else if(nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_T) {
 			this.pushHankaku();
 			t_flag = 1;
-		} else if (e.getKeyCode() == NativeKeyEvent.VC_SLASH){
+		} else if (nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_SLASH){
 			slash_flag = 1;
 		}
 		ent_flag = 0;
