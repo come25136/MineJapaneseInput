@@ -23,7 +23,7 @@ public class Main extends NativeKeyAdapter {
 
 	public Main() throws Exception {
 		robot = new Robot();
-		Logger logger = Logger.getLogger("GlobalScreen");
+		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 		logger.setLevel(Level.WARNING);
 		SystemTray.getSystemTray().add(createMenu());
 
@@ -64,8 +64,10 @@ public class Main extends NativeKeyAdapter {
 			}
 			return;
 		} else if(nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_T) {
-			this.pushHankaku();
-			t_flag = 1;
+			if (slash_flag == 0 && t_flag ==0) {
+				this.pushHankaku();
+				t_flag = 1;
+			}
 		} else if (nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_SLASH){
 			slash_flag = 1;
 		}
