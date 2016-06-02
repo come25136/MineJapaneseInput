@@ -55,7 +55,7 @@ public class Main extends NativeKeyAdapter {
 		if(nativeKeyEvent.getKeyCode() == NativeKeyEvent.VC_ENTER) {
 			if(t_flag == 1 && ent_flag == 1) {
 				this.pushHankaku();
-				t_flag = 1;
+				t_flag = 0;
 				ent_flag = 0;
 			} else if (slash_flag == 1) {
 				slash_flag = 0;
